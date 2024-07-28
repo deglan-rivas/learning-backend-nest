@@ -5,23 +5,7 @@ import { Car } from './interfaces/car.interface';
 
 @Injectable()
 export class CarsService {
-  private cars: Car[] = [
-    {
-      id: uuidv4(),
-      brand: 'Toyota',
-      name: 'T1',
-    },
-    {
-      id: uuidv4(),
-      brand: 'Jepeeta',
-      name: 'J1',
-    },
-    {
-      id: uuidv4(),
-      brand: 'Tokio',
-      name: 'T2',
-    },
-  ];
+  private cars: Car[] = [];
 
   findAll() {
     return this.cars;
@@ -56,5 +40,9 @@ export class CarsService {
     this.findOneById(id);
 
     this.cars = this.cars.filter((car) => car.id !== id);
+  }
+
+  fillWithSeed(carsSeed: Car[]): void {
+    this.cars = carsSeed;
   }
 }
