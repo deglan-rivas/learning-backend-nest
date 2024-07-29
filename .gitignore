@@ -76,3 +76,7 @@ coverage/
 
 # Ignore Linux system files
 *~
+
+
+# volumes
+mongo
