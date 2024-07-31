@@ -25,3 +25,8 @@ bootstrap();
 // las clases o dtos o interfaces se pueden importar sin declarar en el module.ts
 // está bien que los cars y brands sean private, solo deben modificarse con el crud, por eso creamos un public method fillWithSeed
 // no olvidar el pnpm build y pnpm start:prod como comando que debe ejectuar nuestro hosting tipo railway
+
+// interface parecido a class del entity pero sin instanciacion
+// hay un tolowercase en el dto de create brand xd más adelante podré forzarlo a que se convierta
+// las clases o dtos o interfaces se pueden importar sin declarar en el module.ts
+// está bien que los cars y brands sean private, solo deben modificarse con el crud, por eso creamos un public method fillWithSeed

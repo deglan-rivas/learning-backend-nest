@@ -31,6 +31,10 @@ docker compose up -d
 ```
 pnpm start:dev
 ```
+7. Reconstruir la base de datos utilizando el seed
+```
+http://localhost:3000/api/v2/seed
+```
 
 # Stack de tecnologías
 
