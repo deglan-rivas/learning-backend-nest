@@ -48,4 +48,15 @@ bootstrap();
 // node 18 tiene el fetch :o
 // notar que nest tiene su propia implementación de axios como dice una respuesta de la nota
 
+// nest cap9 batch2
+// instalar pnpm i joi
+// crear el joi.validation.ts
+// agregar el obj con la validación de cada uno -> este es el primer filtro y las añade como str
+// setear el config en el mismo nivel que el loader -> recordar hacer la conversión en loader o seguirá como string, joiSchema afecta antes de ir al loader
+// agregar Creación de env var en el readme.md
+// crear un nuevo servicio en railway -> add service, escoger mongodb, copiar la MONGO_URI a nuestr env file y correrlo para ejecutar el seed
+// para desplegar crear nuevo servicios de railway, en local cambiar comandos clásicos por build y start que todo host reconoce, subirlo a github, enlazarlo railway con github, parar el deploy, cambiar a la rama x si no es main, agregar env vars ez, redeploy nomás
+// yo prefiero dockerizarlo xd -> crear Dockerfile, .dockerignore, leer monostage multistage y docker-compose.prod.yml -> entender cada paso de node_modules deps build y correr en prod, usar el .env.prod, especificarlo en el docker compose -f x -e x --build y -d, ignorar el .env.prod en .gitignore -> solo falta persistir la data con volumes y entrar al container para ver si se nos escapó algún file privado como .env o .env.prod en .dockerignore xD -> notar que su pokeapp pesa 400MB el mío 140 creo xD
+// crear el production build en el readme.md
+
 // TODO para la próxima solo permitir un mongoid que debería tenerlo el componente de react que use un .forEach, así creamos un pipe en el backend de nest y golpeamos una sola vez a la mongodb en lugar de hasta 3 como hacemos ahora en el getOneById del .service.ts xd

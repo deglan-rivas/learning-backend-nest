@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  pokeApp:
+    depends_on:
+      - mongoDB
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pokedex-docker
+    # container_name: pokeApp
+    restart: always # reiniciar el contenedor si se detiene
+    ports:
+      - "${PORT}:${PORT}"
+    # working_dir: /var/www/pokedex
+    environment:
+      MONGODB_URI: ${MONGODB_URI}
+      PORT: ${PORT}
+      DEFAULT_LIMIT: ${DEFAULT_LIMIT}
+    # volumes:
+    #   - ./:/var/www/pokedex
+
+  mongoDB:
+    image: mongo:6.0.13-rc0-jammy
+    # container_name: pokeMongoDB
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      # MONGODB_DATABASE: learning_nest_pokemon
+      # MONGO_INITDB_ROOT_USERNAME: root
+      # MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./mongo:/data/db

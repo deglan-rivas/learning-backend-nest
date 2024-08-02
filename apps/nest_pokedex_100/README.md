@@ -27,11 +27,13 @@ pnpm i -g @nestjs/cli
 ```
 docker compose up -d
 ```
-6. Levantar el servidor en desarrollo
+6. Crear el archivo ```.env``` y llenar la variables de entorno a partir del __.env.template__
+
+7. Levantar el servidor en desarrollo
 ```
 pnpm start:dev
 ```
-7. Reconstruir la base de datos utilizando el seed
+8. Reconstruir la base de datos utilizando el seed
 ```
 http://localhost:3000/api/v2/seed
 ```
@@ -40,3 +42,19 @@ http://localhost:3000/api/v2/seed
 
 * MongoDB
 * Nestjs
+
+# Production Build
+1. Crear el archivo ```.env.prod```
+2. Llenar las variables de entorno a partir del __.env.template__
+3. Crear la nueva imagen
+```
+docker compose -f docker-compose.prod.yml --env-file .env.prod up --build -d
+```
+4. Apagar los contenedores
+```
+docker compose -f docker-compose.prod.yml --env-file .env.prod down
+```
+5. Levantar la imagen construida
+```
+docker compose -f docker-compose.prod.yml --env-file .env.prod up -d
+```
