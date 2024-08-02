@@ -1,13 +1,20 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { PokemonModule } from './pokemon/pokemon.module';
 import { CommonModule } from './common/common.module';
+import { EnvConfiguration } from './config/env.config';
+import { PokemonModule } from './pokemon/pokemon.module';
 import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      // isGlobal: true,
+      // envFilePath: '.env',
+      load: [EnvConfiguration],
+    }),
     PokemonModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
@@ -17,4 +24,10 @@ import { SeedModule } from './seed/seed.module';
     SeedModule,
   ],
 })
-export class AppModule { }
+export class AppModule {
+  // constructor() {
+  //   console.log(process.env.PORT);
+  //   console.log(+process.env.PORT);
+  //   console.log(typeof process.env.PORT);
+  // }
+}
