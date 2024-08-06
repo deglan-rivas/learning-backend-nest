@@ -60,3 +60,22 @@ bootstrap();
 // crear el production build en el readme.md
 
 // TODO para la próxima solo permitir un mongoid que debería tenerlo el componente de react que use un .forEach, así creamos un pipe en el backend de nest y golpeamos una sola vez a la mongodb en lugar de hasta 3 como hacemos ahora en el getOneById del .service.ts xd
+
+// pokedex_101
+// al inyectar la dep en el seed que el constructor use un AxiosAdapter y no un HttpInterface xD
+// en el common.module del 101 solo se puede usar providers para los Adapters, imports no, parece que en imports solo van Modules como en el app, no se entiende bien la diferencia xD -> https://stackoverflow.com/questions/73751658/what-is-the-difference-between-providers-and-imports-in-nestjs
+// en mi pokemon.entity que según nest docs debería ser schema/pokemon.schema.ts xd no hay ningún extends Document como el original xd parece que nest docs 2020 a 2024 cambió
+// nest docs configuration tiene mayor info de cómo tipar el configService, incluso usarlo como .yaml xd
+// notar que si comentamos el JoiValidationSchema los typeof de todas las env vars importadas en pokemon.service.ts dan string xD por eso mejor siempre usar joi incluso is es repetitivo -> https://dev.to/one-beyond/how-to-configure-and-use-environment-variables-in-nestjs-3cm2 -> https://oyugoobonyo.medium.com/uploading-files-in-nestjs-eeec53883696 -> clean architecture nest: https://medium.com/@jonathan.pretre91/clean-architecture-with-nestjs-e089cef65045 -> https://github.com/royib/clean-architecture-nestJS -> https://github.com/wesleey/nest-clean-architecture
+
+// resumen pokedex_101
+// nest new
+// nest g res common pokemon seed
+// global prefix
+// static content
+// global validation pipes
+// mongo schema según nestjs docs
+// carpintería de crud pokemon con mongodb: custom pipes, interfaces y adapters
+// seed, axios, interfaces
+// paginación, dto
+// env vars loader, joiSchema, dockerfile, docker-compose y readme

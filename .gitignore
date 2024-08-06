@@ -80,3 +80,6 @@ coverage/
 
 # volumes
 mongo
+.env
+.env.prod
+postgres
