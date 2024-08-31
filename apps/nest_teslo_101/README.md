@@ -8,7 +8,7 @@
 # Running the app
 1. Clone repository
 ```
-git clone https://github.com/deglan-rivas/learning-backend-nest ; cd apps/nest_teslo_100
+git clone https://github.com/deglan-rivas/learning-backend-nest ; cd apps/nest_teslo_101
 ```
 2. Create and fill __.env__ from __.env.template__
 3. Install dependencies
@@ -17,7 +17,7 @@ pnpm install
 ```
 3. Run containers
 ```
-pnpm start:dev
+pnpm run dev
 ```
 4. Run development server
 ```
