@@ -54,3 +54,27 @@ bootstrap();
 // corregir errores con handleExceptions y el beforeInsert
 // terminar el crud con paginated.dto y beforeUpdate
 // ez crud con postgresql
+
+// testo_101
+// aprendidos
+// siempre validar las importaciones, había traído un paginationDto de nest_pokedex_101 y por eso al no definir un rootDir en el tsconfig del nest_teslo_101, el compilador de ts subía de nivel hasta el apps que es el folder padre directo de ambos, por eso mostraba esas carpetas en el dist, bastó agregar el rootDir ./src, luego encontrar la importación equivocada, corregirla y correr denuevo el pnpm dev, este fue el error original:
+// obtuve este error al ejecutar el comando "pnpm run dev" en nestjs:
+
+// node:internal/modules/cjs/loader:1147
+//   throw err;
+//   ^
+
+// Error: Cannot find module '/home/deglan/Escritorio/practicas_random/learning-backend-nest/apps/nest_teslo_101/dist/main'
+//     at Module._resolveFilename (node:internal/modules/cjs/loader:1144:15)
+//     at Module._load (node:internal/modules/cjs/loader:985:27)
+//     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+//     at node:internal/main/run_main_module:28:49 {
+//   code: 'MODULE_NOT_FOUND',
+//   requireStack: []
+// }
+
+// Node.js v20.11.0
+// ok, lo que pasa es que al ejecutar el comando "pnpm dev" el cual es el siguiente "dev": "nest start --watch", esto me genera el file dist/nest_teslo_101/src/main.js en lugar del file dist/main.js, por qué sucede esto?
+// "rootDir": "./src",
+// también me generaba un tsconfig.build.jsonbuild.json o algo así y otros nuevos files .map y .js en el pokedex, solo los borré fijándome qué files eran untracked o habían cambiado en el source control ez
+// nest dev doesnt generate my dist/main en google xd

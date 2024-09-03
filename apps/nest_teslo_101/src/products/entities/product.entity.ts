@@ -14,21 +14,6 @@ export class Product {
   @Column('text', { unique: true })
   title: string;
 
-  @Column({
-    type: 'text',
-    nullable: true,
-  })
-  description: string;
-
-  @Column('float', { default: 0 })
-  price: number;
-
-  @Column({
-    type: 'int',
-    default: 0,
-  })
-  stock: number;
-
   @Column('text', { unique: true })
   slug: string;
 
@@ -48,8 +33,23 @@ export class Product {
 
   @Column({
     type: 'text',
+    nullable: true,
+  })
+  description: string;
+
+  @Column('float', { default: 0 })
+  price: number;
+
+  @Column({
+    type: 'int',
+    default: 0,
+  })
+  stock: number;
+
+  @Column({
+    type: 'text',
     array: true,
-    // default: [],
+    default: [],
   })
   tags: string[];
 
