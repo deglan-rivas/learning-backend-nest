@@ -55,6 +55,13 @@ bootstrap();
 // terminar el crud con paginated.dto y beforeUpdate
 // ez crud con postgresql
 
+// resumen cap11
+// la idea es agregar una columna array para imágenes no contemplado desde el inicio, relaciones, transacciones y rollback ez, borrar viejas imágenes con update, usar ese endpoint del patch para actualizar imgs,
+// crear la tabla, primero el entity, importarlo en el module, validarlo en datagrip, archivo de barrido
+// onetomany y manytoone ez, cascade true para evitar datos huérfanos así borra en ambas tablas aunque lo mejor siempre es soft delete por si hay facturas con vieja data
+// aceptar el images en el dto, crear el image dentro del product para que añada el id al tq, notar que las images deben ser instancias, usar el image repository, devolver las imágenes como viene y no con sus id's pues eso no debe saber el user,
+// el post usa el array de images inicial para no mostrar los id's, el get o find usa un map para no mostrar los id's, el eager es el equivalente al populate de mongo, justo para eso usamos un orm en lugar de hacer left join xd, typeorm avisa que hay que usar leftjoin si hacemos un querybuilder para usar where es lata pero al menos está documentado y gpt nos puede hacer el bajo, agregar un getOnePlain para no romper la retrocompatibilidad así se respeta sOlid
+
 // testo_101
 // aprendidos
 // siempre validar las importaciones, había traído un paginationDto de nest_pokedex_101 y por eso al no definir un rootDir en el tsconfig del nest_teslo_101, el compilador de ts subía de nivel hasta el apps que es el folder padre directo de ambos, por eso mostraba esas carpetas en el dist, bastó agregar el rootDir ./src, luego encontrar la importación equivocada, corregirla y correr denuevo el pnpm dev, este fue el error original:

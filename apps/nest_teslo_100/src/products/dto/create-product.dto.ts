@@ -56,6 +56,11 @@ export class CreateProductDto {
   @IsArray()
   @ArrayNotEmpty()
   tags: string[];
+
+  @IsString({ each: true })
+  @IsArray()
+  @IsOptional()
+  images?: string[];
 }
 
 // decorador de validación

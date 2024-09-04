@@ -10,7 +10,7 @@ import { Repository } from 'typeorm';
 import { PaginationDto } from '../common/dtos/pagination.dto';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { Product } from './entities/product.entity';
+import { Product, ProductImage } from './entities';
 
 @Injectable()
 export class ProductsService {
@@ -19,13 +19,24 @@ export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
+
+    @InjectRepository(ProductImage)
+    private readonly productImageRepository: Repository<ProductImage>,
   ) { }
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
     // this.logger.log(`createProductDto: ${JSON.stringify(createProductDto)}`);
 
     try {
-      const product = this.productRepository.create(createProductDto);
+      // const product = this.productRepository.create(createProductDto);
+
+      const { images = [], ...productDetails } = createProductDto;
+      const product = this.productRepository.create({
+        ...productDetails,
+        images: images.map((image) =>
+          this.productImageRepository.create({ url: image }),
+        ),
+      });
 
       await this.productRepository.save(product);
 
@@ -36,12 +47,20 @@ export class ProductsService {
     }
   }
 
-  async findAll(paginationDto: PaginationDto): Promise<Product[]> {
+  async findAll(paginationDto: PaginationDto) {
     const { limit = 10, skip = 0 } = paginationDto;
-    return await this.productRepository.find({
+    const products = await this.productRepository.find({
       take: limit,
       skip,
+      relations: {
+        images: true,
+      },
     });
+
+    return products.map((product) => ({
+      ...product,
+      images: product.images.map((image) => image.url),
+    }));
   }
 
   async findOne(id: string): Promise<Product> {
@@ -50,6 +69,14 @@ export class ProductsService {
     if (!product)
       throw new BadRequestException(`Product with id: ${id} not found`);
     return product;
+  }
+
+  async findOnePlain(id: string) {
+    const { images = [], ...rest } = await this.findOne(id);
+    return {
+      ...rest,
+      images: images.map((image) => image.url),
+    };
   }
 
   async update(
