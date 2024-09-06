@@ -17,7 +17,7 @@ pnpm install
 ```
 3. Run containers
 ```
-pnpm start:dev
+pnpm run start:dev
 ```
 4. Run development server
 ```
