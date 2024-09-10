@@ -68,6 +68,25 @@ bootstrap();
 // dado que el seed solo se debe ejecutar una sola vez, entonces es válido usar un forEach con un create que hará unos 100 golpes a la db, lo correcto sería hacer un insertMany como se hizo con mongoDB, pero habría que importar el TypeOrm, crear el repository y usar el insertMany y rip nomás xd, también notar que el shape del CreateDto es el mismo que el de la seedData, por eso ts no da error, si cambiamos una key o hacemos que sea optional con ?: o en sus values habilitamos undefined con | undefined daría error
 // por último renombrar las tablas desde el entityez
 
+// cap12
+// batch1
+// crear el nest g res files --no-spec, anidar un post product, interceptor con tipo y options de multer como dice nest docs, renombrar el uploadedFile y tiparlo multer ez
+// crear el fileFilter, respetar su firme de null true o error false, lo que devuelve es el file o undefined así que validar con un !file,
+// no guardarlo en fs, mejor en cloudinary luego de validarlo xD, se puede limitar el tamaño también, para guardarlo solo usar un diskStorage, multer ya viene con el core de nestjs, guardarlo en static/uploads pues el public es público xd, usar un .gitkeep porque git no trackea folders vacíos,
+// usar un fileName muy similar a fileFilter para darle nombre único incluso si son la misma imagen y así no se chanquen xd usar uuid
+// batch2 seed y auth
+
+// TODO
+// nest cloudinary, postman local
+
+// batch2
+// la idea es devolver el url del static/product luego de guardar la imagen con un POST, usamos un helper que luego se puede hacer global recibiendo el param de subcarpeta como product o user, por ahora solo hay product, usar el Res Response de express para devolver manualmente la respuesta, no olvidar agregarlo pues al declararlo ya le avisamos a nest que devolveremos la response manualmente, notar que usamos el static y el helper del service xd para el user no sepa de dónde viene la imagen ni cuál es la ruta, todo esto incluye el POST y GET xd
+// para retornar el secureUrl no olvidar hacerlo usando env vars, crearlas, importarlas en el módulo files, actualizar el .env.template, también agregar el logger y un mensajito en el main o bootstrap .ts ya que estamos usando el port del .env -> queda pendiente agregar joi para validar o agregarle un | localhost:${port}
+// se puede desplegar en el public y actualizar la ruta agregando el host con el seed, pero me gusta más el static por el control que da usando jwt
+
+// cap13
+// auth es que tenga una llave o token, auto es que además de la llave tenga permiso para ver ese contenido,
+
 // testo_101
 // aprendidos
 // siempre validar las importaciones, había traído un paginationDto de nest_pokedex_101 y por eso al no definir un rootDir en el tsconfig del nest_teslo_101, el compilador de ts subía de nivel hasta el apps que es el folder padre directo de ambos, por eso mostraba esas carpetas en el dist, bastó agregar el rootDir ./src, luego encontrar la importación equivocada, corregirla y correr denuevo el pnpm dev, este fue el error original:
