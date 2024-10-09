@@ -83,3 +83,4 @@ mongo
 .env
 .env.prod
 postgres
+auxiliary/*
