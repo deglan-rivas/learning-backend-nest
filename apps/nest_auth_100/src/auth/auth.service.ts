@@ -2,10 +2,12 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
-import { CreateUserDto } from './dto';
+import { CreateUserDto, LoginUserDto } from './dto';
 import { User } from './entities/user.entity';
 
 @Injectable()
@@ -17,10 +19,47 @@ export class AuthService {
 
   async create(createUserDto: CreateUserDto) {
     try {
-      const user = this.userRepository.create(createUserDto);
-      await this.userRepository.save(user);
+      const { password, ...userData } =
+        this.userRepository.create(createUserDto);
 
-      return user;
+      const userDB = await this.userRepository.save({
+        ...userData,
+        password: bcrypt.hashSync(password, 10),
+      });
+
+      // console.log(userData);
+      // console.log(createUserDto);
+      // console.log(userDB);
+      delete userDB.password;
+      delete userDB.isActive;
+
+      return {
+        ...userDB,
+      };
+    } catch (error) {
+      this.handleDBErrors(error);
+    }
+  }
+
+  async login(loginUserDto: LoginUserDto) {
+    try {
+      const { email, password } = loginUserDto;
+
+      const user = await this.userRepository.findOne({
+        where: { email },
+        select: { email: true, password: true },
+      });
+
+      if (!user)
+        throw new UnauthorizedException('Credentials are not valid (email)');
+
+      if (!bcrypt.compareSync(password, user.password))
+        throw new UnauthorizedException('Credentials are not valid (password)');
+
+      return {
+        ...user,
+        token: 'fake-jwt-token',
+      };
     } catch (error) {
       this.handleDBErrors(error);
     }
